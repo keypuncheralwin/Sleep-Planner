@@ -1,8 +1,16 @@
+const insert = document.getElementById("insert")
+const blurb = document.getElementById("blurb")
+const again = document.querySelector(".again")
+const container = document.querySelector(".container")
 const time = document.getElementById("time")
-const sleepButton = document.getElementById("go")
+const sleepButton = document.querySelector(".buttonStyle")
 const boxes = document.querySelectorAll(".timeDisplay")
 const hours = document.querySelectorAll(".more")
 const cycles = document.querySelectorAll(".cycles")
+const prompt = document.querySelector("#timePrompt")
+
+again.classList.add("hide")
+
 
 let suggestionsArray = []
 
@@ -24,7 +32,7 @@ let cyclesArray = [
     "1 sleep cycle"
 ]
 
-
+//initialising time variables for day.js library
 let hour;
 let min;
 let when = "am"
@@ -32,13 +40,36 @@ let sub = 90;
 
 
 sleepButton.addEventListener("click", event => {
-    let userTime = time.value.split(":").map(Number);
-
+    suggestionsArray.length = 0; //resetting array of time suggestions back to 0
+    if(time.value !== ""){ //only show time suggestions if a valid time is chosen
+        container.classList.remove("hide")
+        container.classList.add("show")
+        prompt.remove()
+        time.remove()
+        sleepButton.remove()
+        again.classList.add("show")
+        again.classList.remove("hide")
+        again.classList.add("show")
+    }
+    let userTime = time.value.split(":").map(Number); //picking apart the user time input and storing it into an array
     convertTime(userTime)
     let flexTime = dayjs(`2021-08-19: ${hour}:${min} ${when}`).format("h:mm a")
     suggestions()
-    console.log(flexTime)
+    
 })
+
+again.addEventListener('click', event =>{
+    container.classList.remove("show")
+    container.classList.add("hide")
+    blurb.after(prompt)
+    prompt.after(time)
+    insert.after(sleepButton)
+    again.classList.remove("show")
+    again.classList.add("hide")
+    
+})
+
+
 
 function convertTime(time) {
     if (time[0] >= 13) {
@@ -72,4 +103,8 @@ function display(arr){
         hours[i].textContent = hoursArray[i]
         cycles[i].textContent = cyclesArray[i]
     }
+}
+
+function hideElement(element){
+    element.classList.add("hide")
 }
