@@ -53,7 +53,7 @@ sleepButton.addEventListener("click", event => {
     }
     let userTime = time.value.split(":").map(Number); //picking apart the user time input and storing it into an array
     convertTime(userTime)
-    let flexTime = dayjs(`2021-08-19: ${hour}:${min} ${when}`).format("h:mm a")
+    let flexTime = dayjs(`2021-12-12: ${hour}:${min} ${when}`).format("h:mm a")
     suggestions()
     
 })
