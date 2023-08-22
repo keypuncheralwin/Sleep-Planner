@@ -107,4 +107,5 @@ function display(arr){
 
 function hideElement(element){
     element.classList.add("hide")
+    console.log('Hide')
 }
